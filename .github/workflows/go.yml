@@ -19,10 +19,10 @@ jobs:
       - name: 编译
         run: |
           mkdir dist
-          GOOS=linux GOARCH=amd64 go build -o ./dist/linux -ldflags "-s -w" main.go
-          GOOS=darwin GOARCH=amd64 go build -o ./dist/mac -ldflags "-s -w" main.go
-          GOOS=windows GOARCH=amd64 go build -o ./dist/win64.exe -ldflags "-s -w" main.go
-          GOOS=windows GOARCH=386 go build -o ./dist/win32.exe -ldflags "-s -w" main.go
+          GOOS=linux GOARCH=amd64 go build -o ./dist/linux -ldflags "-s -w" -gcflags '-N -l' main.go
+          GOOS=darwin GOARCH=amd64 go build -o ./dist/mac -ldflags "-s -w" -gcflags '-N -l' main.go
+          GOOS=windows GOARCH=amd64 go build -o ./dist/win64.exe -ldflags "-s -w" -gcflags '-N -l' main.go
+          GOOS=windows GOARCH=386 go build -o ./dist/win32.exe -ldflags "-s -w" -gcflags '-N -l' main.go
       - name: 加壳
         uses: gacts/upx@master
         with:
